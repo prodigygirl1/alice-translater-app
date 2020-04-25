@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
+
 @app.route('/post', methods=['POST'])
 def main():
 
@@ -39,7 +40,7 @@ def handle_dialog(res, req):
                                   'Скажи: Переведи слово <слово>'
 
         return
-    translate = get_translate(req['request']['original_utterance'])
+    translate = get_translate(req['request']['original_utterance'].split()[-1])
     if translate:
         res['response']['text'] = translate
     else:
@@ -49,7 +50,7 @@ def handle_dialog(res, req):
 def get_translate(word):
     url = 'https://translate.yandex.net/api/v1.5/tr.json/translate'
     params = {
-        'key': '',
+        'key': 'trnsl.1.1.20200425T170742Z.c6acc154e47a990b.85895b23d7a7dd9dfc83aaee290497558530ca78',
         'text': word,
         'lang': 'en'
     }
