@@ -57,8 +57,7 @@ def get_translate(word):
     response = requests.get(url, params=params)
     if response:
         js_resp = response.json()
-        print('ПЕРЕВОД:', js_resp['text'])
-        return js_resp['text']
+        return js_resp['text'][0]
     return None
 
 
